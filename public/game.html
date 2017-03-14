@@ -91,10 +91,10 @@
 
             function setTargetSize() {
                 stage.removeChild(target);
-                var random = Math.floor(Math.random() * 360)
 
                 targetSize = getTargetSize();
-                target = getArc(random, targetSize, createjs.Graphics.getRGB(255, 255, 255));
+                target = getArc(0, targetSize, createjs.Graphics.getRGB(255, 255, 255));
+                target.rotation = Math.floor(Math.random() * 360);
                 stage.addChild(target);
 
                 stage.setChildIndex(player, stage.getNumChildren()-1)
@@ -133,6 +133,10 @@
 
                 if (targetPositionStart < 0) {
                     targetPositionStart+=360
+                }
+
+                if (playerPositionStart < 0) {
+                    playerPositionStart+=360
                 }
 
                 console.log('player is: ' + playerPositionStart + ' and ' + playerPositionEnd);
