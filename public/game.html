@@ -28,7 +28,7 @@
 
     <script>
         function init() {
-            
+
             function getArc(startAngle, length, color) {
                 var width = 10;
                 var diamiter = 100;
@@ -89,8 +89,12 @@
 
             function setTargetSize() {
                 stage.removeChild(target);
-                target = getArc(0, getTargetSize(), createjs.Graphics.getRGB(255, 255, 255));
+                var random = Math.floor(Math.random() * 360)
+
+                target = getArc(random, getTargetSize(), createjs.Graphics.getRGB(255, 255, 255));
                 stage.addChild(target);
+
+                stage.setChildIndex(player, stage.getNumChildren()-1)
             }
 
             function nextLevel() {
@@ -124,7 +128,7 @@
                 } else {
                     console.log('lose')
                 }
-                
+
                 nextLevel();
             });
         }
