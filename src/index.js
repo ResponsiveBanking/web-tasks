@@ -4,7 +4,7 @@ import App from './App';
 import ConfirmComponent from './components/Confirm';
 import NotificationComponent from './components/Notification';
 
-import { Router, Route, browserHistory } from 'react-router'
+import { Router, Route, browserHistory } from 'react-router';
 
 const Root = () => (
     <Router history={browserHistory}>
