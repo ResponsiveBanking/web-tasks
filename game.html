@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="https://code.createjs.com/easeljs-0.8.2.min.js"></script>
+
+    <title>Card</title>
+    <style>
+        body { margin: 0; padding: 0; }
+    </style>
+    
+    <script>
+        function init() {
+            var stage = new createjs.Stage("game");
+
+            var background = new createjs.Shape();
+
+            background.graphics.setStrokeStyle(10);
+            background.graphics.s(createjs.Graphics.getRGB(Math.random()*0xFFFFFF));
+
+            var startAngle = 0 * Math.PI/180;
+            var endAngle = 360 * Math.PI/180;
+            background.graphics.arc(0, 0, 100, startAngle,endAngle);
+
+            background.x = stage.canvas.width/2 - 50 - 5;
+            background.y = stage.canvas.width/2 - 50 - 5;
+            
+            stage.addChild(background);
+
+
+
+
+
+            var target = new createjs.Shape();
+
+            target.graphics.setStrokeStyle(10);
+            target.graphics.s(createjs.Graphics.getRGB(Math.random()*0xFFFFFF));
+
+            var targetStartAngle = 0 * Math.PI/180;
+            var targetEndAngle = 45 * Math.PI/180;
+            target.graphics.arc(0, 0, 100, targetStartAngle, targetEndAngle);
+
+            target.x = stage.canvas.width/2 - 50 - 5;
+            target.y = stage.canvas.width/2 - 50 - 5;
+            
+            stage.addChild(target);
+
+
+            
+            
+            var player = new createjs.Shape();
+
+            player.graphics.setStrokeStyle(10);
+            player.graphics.s(createjs.Graphics.getRGB(Math.random()*0xFFFFFF));
+
+            var playerStartAngle = 0 * Math.PI/180;
+            var playerEndAngle = 45 * Math.PI/180;
+            player.graphics.arc(0, 0, 100, playerStartAngle, playerEndAngle);
+
+            player.x = stage.canvas.width/2 - 50 - 5;
+            player.y = stage.canvas.width/2 - 50 - 5;
+            
+            stage.addChild(player);
+
+
+
+            
+
+
+
+
+
+            //Update stage will render next frame
+            createjs.Ticker.addEventListener("tick", handleTick);
+
+
+            document.addEventListener("click", function(event) {
+                var playerPositionStart = player.rotation - 22.5;
+                var playerPositionEnd = player.rotation + 22.5;
+
+                var targetPositionStart = target.rotation + 0;
+                var targetPositionEnd = target.rotation + 45;
+                
+                console.log('player is: ' + playerPositionStart + ' and ' + playerPositionEnd);
+                console.log('Target is: ' + targetPositionStart + ' and ' + targetPositionEnd);
+
+                if ((playerPositionEnd > targetPositionStart && playerPositionStart < targetPositionEnd)) {
+                    console.log('Winner');
+                } else {
+                    console.log('lose')
+                }
+         });
+
+            function handleTick() {
+               player.rotation += 10;
+
+               if (player.rotation > 360) {
+                   player.rotation = 0;
+               }
+
+                stage.update();
+            }
+        }
+
+
+    </script>
+  </head>
+  <body onload="init()">
+    <canvas id="game" width="500" height="300"></canvas>
+  </body>
+</html>
