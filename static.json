@@ -1,5 +1,5 @@
 {
-  "routes": {
-    "/**": "/"
-  }
+  "root": "public",
+  "clean_urls": true,
+  "error_page": "bla"
 }
