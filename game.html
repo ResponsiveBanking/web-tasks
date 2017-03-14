@@ -27,9 +27,8 @@
 
         h1 {
             margin: 0;
-            padding: 20px;
             font-family: Arial;
-            color: #ff7700;
+            color: rgba(245, 81, 95, 1);
         }
     </style>
 
@@ -58,31 +57,32 @@
             function getTargetSize() {
                 switch (level) {
                     case 1:
-                        return 85;
+                        return 95;
                     case 2:
-                        return 75;
+                        return 85;
                     case 3:
-                        return 65;
+                        return 75;
                     case 4:
-                        return 55;
+                        return 65;
                     case 5:
-                        return 50;
+                        return 60;
                     case 6:
-                        return 45;
+                        return 55;
                     case 7:
-                        return 40;
+                        return 50;
                     case 8:
-                        return 35;
+                        return 45;
                     case 9:
-                        return 30;
+                        return 40;
                     case 10:
-                        return 25;
+                        return 35;
                 }
             }
 
             var level = 1;
 
             var stage = new createjs.Stage("game");
+            createjs.Ticker.setFPS(60);
 
             var text = new createjs.Text(level, "40px Arial", "#ff7700");
             var bounds = text.getBounds();
@@ -91,15 +91,15 @@
                 text.textBaseline = "top";
             stage.addChild(text);
 
-            var track = getArc(0, 360, createjs.Graphics.getRGB(66, 147, 33));
+            var track = getArc(0, 360, createjs.Graphics.getRGB(255, 255, 255));
             stage.addChild(track);
 
             var targetSize= getTargetSize();
-            var target = getArc(0, targetSize, createjs.Graphics.getRGB(255, 255, 255));
+            var target = getArc(0, targetSize, createjs.Graphics.getRGB(66, 147, 33));
             target.rotation = Math.floor(Math.random() * 360);
             stage.addChild(target);
 
-            var playerSize = 45;
+            var playerSize = 30;
             var player = getArc(0, playerSize, createjs.Graphics.getRGB(245, 81, 95));
             stage.addChild(player);
 
@@ -107,7 +107,7 @@
                 stage.removeChild(target);
 
                 targetSize = getTargetSize();
-                target = getArc(0, targetSize, createjs.Graphics.getRGB(255, 255, 255));
+                target = getArc(0, targetSize, createjs.Graphics.getRGB(66, 147, 33));
                 target.rotation = Math.floor(Math.random() * 360);
                 stage.addChild(target);
 
@@ -133,7 +133,7 @@
             }
 
             createjs.Ticker.addEventListener("tick", function() {
-                player.rotation += 10;
+                player.rotation += 5;
 
                 if (player.rotation > 360) {
                     player.rotation = 0;
@@ -180,6 +180,7 @@
     <div>
         <h1>Tap when the shapes meet</h1>
         <canvas id="game" width="320" height="320"></canvas>
+        <h1>Score 10 to complete your purchase</h1>
     </div>
     <script>
         init(1);
