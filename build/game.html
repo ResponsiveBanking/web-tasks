@@ -129,7 +129,12 @@
             }
 
             function youAreWinner() {
-                alert("Hand back to android");
+                console.log("Hand back to android");
+                if (Android) {
+                    Android.gameCompleted();
+                } else {
+                    console.log("Android is null");
+                }
             }
 
             createjs.Ticker.addEventListener("tick", function() {
