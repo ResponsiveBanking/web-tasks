@@ -28,6 +28,7 @@
 
     <script>
         function init() {
+            
             function getArc(startAngle, length, color) {
                 var width = 10;
                 var diamiter = 100;
@@ -47,19 +48,66 @@
                 return arc;
             }
 
+            function getTargetSize() {
+                switch (level) {
+                    case 1:
+                        return 75;
+                    case 2:
+                        return 65;
+                    case 3:
+                        return 55;
+                    case 4:
+                        return 45;
+                    case 5:
+                        return 40;
+                    case 6:
+                        return 35;
+                    case 7:
+                        return 30;
+                    case 8:
+                        return 25;
+                    case 9:
+                        return 20;
+                    case 10:
+                        return 15;
+                }
+            }
+
+            var level = 1;
+
             var stage = new createjs.Stage("game");
 
             var track = getArc(0, 360, createjs.Graphics.getRGB(66, 147, 33));
             stage.addChild(track);
 
-            var target = getArc(0, 45, createjs.Graphics.getRGB(255, 255, 255));
+            var target = getArc(0, getTargetSize(), createjs.Graphics.getRGB(255, 255, 255));
             stage.addChild(target);
 
             var playerSize = 45;
             var player = getArc(0, playerSize, createjs.Graphics.getRGB(245, 81, 95));
             stage.addChild(player);
 
-            createjs.Ticker.addEventListener("tick", handleTick);
+            function setTargetSize() {
+                stage.removeChild(target);
+                target = getArc(0, getTargetSize(), createjs.Graphics.getRGB(255, 255, 255));
+                stage.addChild(target);
+            }
+
+            function nextLevel() {
+                level++;
+                if (level > 10) level = 10;
+                setTargetSize();
+            }
+
+            createjs.Ticker.addEventListener("tick", function() {
+                player.rotation += 10;
+
+                if (player.rotation > 360) {
+                    player.rotation = 0;
+                }
+
+                stage.update();
+            });
 
             document.addEventListener("click", function(event) {
                 var playerPositionStart = player.rotation - playerSize/2;
@@ -76,23 +124,18 @@
                 } else {
                     console.log('lose')
                 }
+                
+                nextLevel();
             });
-
-            function handleTick() {
-                player.rotation += 10;
-
-                if (player.rotation > 360) {
-                    player.rotation = 0;
-                }
-
-                stage.update();
-            }
         }
     </script>
   </head>
-  <body onload="init()">
+  <body>
     <div>
         <canvas id="game" width="320" height="320"></canvas>
     </div>
+    <script>
+        init(1);
+    </script>
   </body>
 </html>
