@@ -4,10 +4,10 @@ import App from './App';
 import ConfirmComponent from './components/Confirm';
 import NotificationComponent from './components/Notification';
 
-import { Router, Route, browserHistory } from 'react-router';
+import { Router, Route, hashHistory } from 'react-router';
 
 const Root = () => (
-    <Router history={browserHistory}>
+    <Router history={hashHistory}>
         <Route path="/" component={App}>
             <Route path="notification" component={NotificationComponent} />
             <Route path="confirm" component={ConfirmComponent} />
