@@ -5,11 +5,23 @@ const ConfirmComponent = (context) => {
     const name = context.router.location.query.name;
 
     return (
-        <div>
-            <Greeting name={name} />
-            Confirm payment...
+        <div className="card">
+            <div className="card-block">
+                <Greeting name={name} />
+                <p className="card-text">
+                    Details here
+                </p>
+                <div className="row">
+                    <div className="col">
+                        <a href="#" className="btn btn-primary btn-block">Yes</a>
+                    </div>
+                    <div className="col">
+                        <a href="#" className="btn btn-secondary btn-block">No</a>
+                    </div>
+                </div>
+            </div>
         </div>
-    )
+    );
 };
 
 ConfirmComponent.contextTypes = {

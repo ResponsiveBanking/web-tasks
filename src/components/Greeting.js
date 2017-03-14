@@ -2,6 +2,6 @@ import React from 'react';
 
 export default ({ name }) => (
     <div>
-        <h1>Hi {name}!</h1>
+        <h4 className="card-title">Hi {name}!</h4>
     </div>
 );
