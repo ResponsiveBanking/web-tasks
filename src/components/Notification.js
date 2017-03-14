@@ -13,9 +13,9 @@ const NotificationComponent = (context) => {
         <div className="card">
             <div className="card-block">
                 <Greeting name={name} />
-                <p className="card-text">
+                <div className="card-text">
                     <Details price={price} store={store} balance={balance} remainingBalance={remainingBalance} />
-                </p>
+                </div>
                 <div className="row">
                     <div className="col">
                         <a href="#" className="btn btn-primary btn-block">Ok</a>
