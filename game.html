@@ -83,6 +83,7 @@
 
             var stage = new createjs.Stage("game");
             createjs.Ticker.setFPS(60);
+            createjs.Touch.enable(stage);
 
             var text = new createjs.Text(level, "40px Arial", "#ff7700");
             var bounds = text.getBounds();
