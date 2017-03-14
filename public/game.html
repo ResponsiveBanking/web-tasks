@@ -28,7 +28,7 @@
 
     <script>
         function init() {
-            
+
             function getArc(startAngle, length, color) {
                 var width = 10;
                 var diamiter = 100;
@@ -80,7 +80,9 @@
             var track = getArc(0, 360, createjs.Graphics.getRGB(66, 147, 33));
             stage.addChild(track);
 
-            var target = getArc(0, getTargetSize(), createjs.Graphics.getRGB(255, 255, 255));
+            var targetSize= getTargetSize();
+            var target = getArc(0, targetSize, createjs.Graphics.getRGB(255, 255, 255));
+            target.rotation = Math.floor(Math.random() * 360);
             stage.addChild(target);
 
             var playerSize = 45;
@@ -89,8 +91,13 @@
 
             function setTargetSize() {
                 stage.removeChild(target);
-                target = getArc(0, getTargetSize(), createjs.Graphics.getRGB(255, 255, 255));
+                var random = Math.floor(Math.random() * 360)
+
+                targetSize = getTargetSize();
+                target = getArc(random, targetSize, createjs.Graphics.getRGB(255, 255, 255));
                 stage.addChild(target);
+
+                stage.setChildIndex(player, stage.getNumChildren()-1)
             }
 
             function nextLevel() {
@@ -121,8 +128,12 @@
                 var playerPositionStart = player.rotation - playerSize/2;
                 var playerPositionEnd = player.rotation + playerSize/2;
 
-                var targetPositionStart = target.rotation + 0;
-                var targetPositionEnd = target.rotation + 45;
+                var targetPositionStart = target.rotation - targetSize/2;
+                var targetPositionEnd = target.rotation + targetSize/2;
+
+                if (targetPositionStart < 0) {
+                    targetPositionStart+=360
+                }
 
                 console.log('player is: ' + playerPositionStart + ' and ' + playerPositionEnd);
                 console.log('Target is: ' + targetPositionStart + ' and ' + targetPositionEnd);
@@ -139,8 +150,6 @@
                     console.log('lose');
                     restartLevel();
                 }
-                
-                
             });
         }
     </script>
