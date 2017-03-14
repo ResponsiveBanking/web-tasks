@@ -99,6 +99,14 @@
                 setTargetSize();
             }
 
+            function restartLevel() {
+                setTargetSize();
+            }
+
+            function youAreWinner() {
+                alert("Hand back to android");
+            }
+
             createjs.Ticker.addEventListener("tick", function() {
                 player.rotation += 10;
 
@@ -121,11 +129,18 @@
 
                 if ((playerPositionEnd > targetPositionStart && playerPositionStart < targetPositionEnd)) {
                     console.log('Winner');
+                    if (level < 10) {
+                        nextLevel();
+                    } else {
+                        youAreWinner();
+                    }
+                    
                 } else {
-                    console.log('lose')
+                    console.log('lose');
+                    restartLevel();
                 }
                 
-                nextLevel();
+                
             });
         }
     </script>
