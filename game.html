@@ -24,10 +24,18 @@
             background: -webkit-linear-gradient(290deg, #3023AE, #C96DD8); /* For Safari 5.1 to 6.0 */
             text-align: center;
         }
+
+        h1 {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial;
+            color: #ff7700;
+        }
     </style>
 
     <script>
         function init() {
+
             function getArc(startAngle, length, color) {
                 var width = 10;
                 var diamiter = 100;
@@ -47,38 +55,84 @@
                 return arc;
             }
 
+            function getTargetSize() {
+                switch (level) {
+                    case 1:
+                        return 85;
+                    case 2:
+                        return 75;
+                    case 3:
+                        return 65;
+                    case 4:
+                        return 55;
+                    case 5:
+                        return 50;
+                    case 6:
+                        return 45;
+                    case 7:
+                        return 40;
+                    case 8:
+                        return 35;
+                    case 9:
+                        return 30;
+                    case 10:
+                        return 25;
+                }
+            }
+
+            var level = 1;
+
             var stage = new createjs.Stage("game");
+
+            var text = new createjs.Text(level, "40px Arial", "#ff7700");
+            var bounds = text.getBounds();
+                text.x = stage.canvas.width/2 - bounds.width/2;
+                text.y = stage.canvas.height/2 - bounds.height/2;
+                text.textBaseline = "top";
+            stage.addChild(text);
 
             var track = getArc(0, 360, createjs.Graphics.getRGB(66, 147, 33));
             stage.addChild(track);
 
-            var target = getArc(0, 45, createjs.Graphics.getRGB(255, 255, 255));
+            var targetSize= getTargetSize();
+            var target = getArc(0, targetSize, createjs.Graphics.getRGB(255, 255, 255));
+            target.rotation = Math.floor(Math.random() * 360);
             stage.addChild(target);
 
             var playerSize = 45;
             var player = getArc(0, playerSize, createjs.Graphics.getRGB(245, 81, 95));
             stage.addChild(player);
 
-            createjs.Ticker.addEventListener("tick", handleTick);
+            function setTargetSize() {
+                stage.removeChild(target);
 
-            document.addEventListener("click", function(event) {
-                var playerPositionStart = player.rotation - playerSize/2;
-                var playerPositionEnd = player.rotation + playerSize/2;
+                targetSize = getTargetSize();
+                target = getArc(0, targetSize, createjs.Graphics.getRGB(255, 255, 255));
+                target.rotation = Math.floor(Math.random() * 360);
+                stage.addChild(target);
 
-                var targetPositionStart = target.rotation + 0;
-                var targetPositionEnd = target.rotation + 45;
+                stage.setChildIndex(player, stage.getNumChildren()-1)
+            }
 
-                console.log('player is: ' + playerPositionStart + ' and ' + playerPositionEnd);
-                console.log('Target is: ' + targetPositionStart + ' and ' + targetPositionEnd);
+            function nextLevel() {
+                level++;
+                if (level > 10) level = 10;
+                setTargetSize();
+                text.set({text: level})
+                var bounds = text.getBounds();
+                    text.x = stage.canvas.width/2 - bounds.width/2;
+                    text.y = stage.canvas.height/2 - bounds.height/2;
+            }
 
-                if ((playerPositionEnd > targetPositionStart && playerPositionStart < targetPositionEnd)) {
-                    console.log('Winner');
-                } else {
-                    console.log('lose')
-                }
-            });
+            function restartLevel() {
+                setTargetSize();
+            }
 
-            function handleTick() {
+            function youAreWinner() {
+                alert("Hand back to android");
+            }
+
+            createjs.Ticker.addEventListener("tick", function() {
                 player.rotation += 10;
 
                 if (player.rotation > 360) {
@@ -86,13 +140,49 @@
                 }
 
                 stage.update();
-            }
+            });
+
+            document.addEventListener("click", function(event) {
+                var playerPositionStart = player.rotation - playerSize/2;
+                var playerPositionEnd = player.rotation + playerSize/2;
+
+                var targetPositionStart = target.rotation - targetSize/2;
+                var targetPositionEnd = target.rotation + targetSize/2;
+
+                if (targetPositionStart < 0) {
+                    targetPositionStart+=360
+                }
+
+                if (playerPositionStart < 0) {
+                    playerPositionStart+=360
+                }
+
+                console.log('player is: ' + playerPositionStart + ' and ' + playerPositionEnd);
+                console.log('Target is: ' + targetPositionStart + ' and ' + targetPositionEnd);
+
+                if ((playerPositionEnd > targetPositionStart && playerPositionStart < targetPositionEnd)) {
+                    console.log('Winner');
+                    if (level < 10) {
+                        nextLevel();
+                    } else {
+                        youAreWinner();
+                    }
+
+                } else {
+                    console.log('lose');
+                    restartLevel();
+                }
+            });
         }
     </script>
   </head>
-  <body onload="init()">
+  <body>
     <div>
+        <h1>Tap when the shapes meet</h1>
         <canvas id="game" width="320" height="320"></canvas>
     </div>
+    <script>
+        init(1);
+    </script>
   </body>
 </html>
