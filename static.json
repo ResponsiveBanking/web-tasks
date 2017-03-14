@@ -1,5 +1,8 @@
 {
   "root": "public",
   "clean_urls": true,
-  "error_page": "bla"
+  "error_page": "bla",
+  "routes": {
+    "/**": "index.html"
+  }
 }
