@@ -24,6 +24,13 @@
             background: -webkit-linear-gradient(290deg, #3023AE, #C96DD8); /* For Safari 5.1 to 6.0 */
             text-align: center;
         }
+
+        h1 {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial;
+            color: #ff7700;
+        }
     </style>
 
     <script>
@@ -51,31 +58,38 @@
             function getTargetSize() {
                 switch (level) {
                     case 1:
-                        return 75;
+                        return 85;
                     case 2:
-                        return 65;
+                        return 75;
                     case 3:
-                        return 55;
+                        return 65;
                     case 4:
-                        return 45;
+                        return 55;
                     case 5:
-                        return 40;
+                        return 50;
                     case 6:
-                        return 35;
+                        return 45;
                     case 7:
-                        return 30;
+                        return 40;
                     case 8:
-                        return 25;
+                        return 35;
                     case 9:
-                        return 20;
+                        return 30;
                     case 10:
-                        return 15;
+                        return 25;
                 }
             }
 
             var level = 1;
 
             var stage = new createjs.Stage("game");
+
+            var text = new createjs.Text(level, "40px Arial", "#ff7700");
+            var bounds = text.getBounds();
+                text.x = stage.canvas.width/2 - bounds.width/2;
+                text.y = stage.canvas.height/2 - bounds.height/2;
+                text.textBaseline = "top";
+            stage.addChild(text);
 
             var track = getArc(0, 360, createjs.Graphics.getRGB(66, 147, 33));
             stage.addChild(track);
@@ -104,6 +118,10 @@
                 level++;
                 if (level > 10) level = 10;
                 setTargetSize();
+                text.set({text: level})
+                var bounds = text.getBounds();
+                    text.x = stage.canvas.width/2 - bounds.width/2;
+                    text.y = stage.canvas.height/2 - bounds.height/2;
             }
 
             function restartLevel() {
@@ -149,7 +167,7 @@
                     } else {
                         youAreWinner();
                     }
-                    
+
                 } else {
                     console.log('lose');
                     restartLevel();
@@ -160,6 +178,7 @@
   </head>
   <body>
     <div>
+        <h1>Tap when the shapes meet</h1>
         <canvas id="game" width="320" height="320"></canvas>
     </div>
     <script>
