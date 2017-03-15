@@ -38,6 +38,27 @@
         }
     </style>
     <title>Card</title>
+    <script>
+        function dontHelpMe() {
+            console.log("Hand back to android - dontHelpMe");
+            if (typeof Android !== 'undefined') {
+                console.log('dontHelpMe is: ' + typeof Android.dontHelpMe);
+                Android.dontHelpMe();
+            } else {
+                console.log("Android is null");
+            }
+        }
+
+        function helpMe() {
+            console.log("Hand back to android - helpMe");
+            if (typeof Android !== 'undefined') {
+                console.log('helpMe is: ' + typeof Android.helpMe);
+                Android.helpMe();
+            } else {
+                console.log("Android is null");
+            }
+        }
+    </script>
   </head>
   <body>
     <div id="root"></div>
@@ -50,9 +71,9 @@
             <p>Lorem ipsum dolor sit ame. Excepteur sint occaecat cupidatat non proident, sunt in anim id est laborum.</p>
             <div class="row">
                 <div class="col">
-                    <a href="#" class="btn btn-primary btn-block">HELP ME</a>
+                    <button onClick="javascipt: helpMe()" class="btn btn-primary btn-block">HELP ME</button>
                     <p>I am text describing the above button</p>
-                    <a href="#" class="btn btn-secondary btn-block">DON'T HELP ME</a>
+                    <button onClick="javascipt: dontHelpMe()"class="btn btn-secondary btn-block">DON'T HELP ME</button>
                     <p>I am text describing the above button</p>
                 </div>
             </div>
