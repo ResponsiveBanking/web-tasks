@@ -92,6 +92,8 @@
 
             var level = 0;
 
+            var running = true;
+
             var stage = new createjs.Stage("game");
             createjs.Ticker.setFPS(60);
             createjs.Touch.enable(stage);
@@ -106,7 +108,7 @@
             var track = getArc(0, 360, createjs.Graphics.getRGB(255, 255, 255));
             stage.addChild(track);
 
-            var targetSize= getTargetSize();
+            var targetSize = getTargetSize();
             var target = getArc(0, targetSize, createjs.Graphics.getRGB(66, 147, 33));
             target.rotation = Math.floor(Math.random() * 360);
             stage.addChild(target);
@@ -141,10 +143,12 @@
             }
 
             createjs.Ticker.addEventListener("tick", function() {
-                player.rotation += 5;
+                if (running) {
+                    player.rotation += 5;
 
-                if (player.rotation > 360) {
-                    player.rotation = 0;
+                    if (player.rotation > 360) {
+                        player.rotation = 0;
+                    }
                 }
 
                 stage.update();
@@ -153,11 +157,15 @@
             function click(event) {
                 event.preventDefault();
 
+                running = false;
+
                 var playerPositionStart = player.rotation - playerSize/2;
                 var playerPositionEnd = player.rotation + playerSize/2;
 
                 var targetPositionStart = target.rotation - targetSize/2;
                 var targetPositionEnd = target.rotation + targetSize/2;
+
+                running = true;
 
                 if (targetPositionStart < 0) {
                     targetPositionStart+=360
@@ -192,7 +200,6 @@
   </head>
   <body>
     <div>
-        <button onclick="javascript: youAreWinner()">Click</button>
         <h1>Tap when the shapes meet</h1>
         <canvas id="game" width="320" height="320"></canvas>
         <h1>Score 10 to complete your purchase</h1>
