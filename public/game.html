@@ -6,6 +6,7 @@
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
 
     <link rel="stylesheet" type="text/css" href="game.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script src="https://code.createjs.com/easeljs-0.8.2.min.js"></script>
@@ -28,8 +29,18 @@
 
         h1 {
             margin: 0;
+            padding-top: 15px;
             font-family: Arial;
-            color: rgba(245, 81, 95, 1);
+            color: white;
+            font-size: 28px;
+        }
+
+        .btn-primary {
+            color: #003366;
+            background-color: white;
+            border-color: white;
+            max-width: 250px;
+            margin: 15px auto
         }
     </style>
 
@@ -201,11 +212,11 @@
   </head>
   <body>
     <div>
-        
+
         <h1>Tap when the shapes meet</h1>
         <canvas id="game" width="320" height="320"></canvas>
         <h1>Score 10 to complete your purchase</h1>
-        <button onclick="javascript: youAreWinner()">Click</button>
+            <button class="btn btn-primary btn-block">Cancel transaction</button>
     </div>
     <script>
         init(1);
