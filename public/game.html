@@ -15,6 +15,7 @@
         body {
             margin: 0;
             padding: 0;
+            touch-action: none;
         }
 
         div  {
@@ -56,30 +57,30 @@
 
             function getTargetSize() {
                 switch (level) {
-                    case 1:
+                    case 0:
                         return 95;
-                    case 2:
+                    case 1:
                         return 85;
-                    case 3:
+                    case 2:
                         return 75;
-                    case 4:
+                    case 3:
                         return 65;
-                    case 5:
+                    case 4:
                         return 60;
-                    case 6:
+                    case 5:
                         return 55;
-                    case 7:
+                    case 6:
                         return 50;
-                    case 8:
+                    case 7:
                         return 45;
-                    case 9:
+                    case 8:
                         return 40;
-                    case 10:
+                    case 9:
                         return 35;
                 }
             }
 
-            var level = 1;
+            var level = 0;
 
             var stage = new createjs.Stage("game");
             createjs.Ticker.setFPS(60);
@@ -131,7 +132,7 @@
 
             function youAreWinner() {
                 console.log("Hand back to android");
-                if (Android) {
+                if (typeof Android !== 'undefined') {
                     Android.gameCompleted();
                 } else {
                     console.log("Android is null");
@@ -148,7 +149,9 @@
                 stage.update();
             });
 
-            document.addEventListener("click", function(event) {
+            function click(event) {
+                event.preventDefault();
+
                 var playerPositionStart = player.rotation - playerSize/2;
                 var playerPositionEnd = player.rotation + playerSize/2;
 
@@ -178,7 +181,11 @@
                     console.log('lose');
                     restartLevel();
                 }
-            });
+            }
+
+            document.addEventListener("touchstart", click);
+            document.addEventListener("click", click);
+
         }
     </script>
   </head>
