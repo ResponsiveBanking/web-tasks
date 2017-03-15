@@ -34,6 +34,16 @@
     </style>
 
     <script>
+        function youAreWinner() {
+            console.log("Hand back to android");
+            if (typeof Android !== 'undefined') {
+                console.log('gameCompleted is: ' + typeof Android.gameCompleted);
+                Android.gameCompleted();
+            } else {
+                console.log("Android is null");
+            }
+        }
+
         function init() {
 
             function getArc(startAngle, length, color) {
@@ -130,15 +140,6 @@
                 setTargetSize();
             }
 
-            function youAreWinner() {
-                console.log("Hand back to android");
-                if (typeof Android !== 'undefined') {
-                    Android.gameCompleted();
-                } else {
-                    console.log("Android is null");
-                }
-            }
-
             createjs.Ticker.addEventListener("tick", function() {
                 player.rotation += 5;
 
@@ -166,11 +167,11 @@
                     playerPositionStart+=360
                 }
 
-                console.log('player is: ' + playerPositionStart + ' and ' + playerPositionEnd);
-                console.log('Target is: ' + targetPositionStart + ' and ' + targetPositionEnd);
+                //console.log('player is: ' + playerPositionStart + ' and ' + playerPositionEnd);
+                //console.log('Target is: ' + targetPositionStart + ' and ' + targetPositionEnd);
 
                 if ((playerPositionEnd > targetPositionStart && playerPositionStart < targetPositionEnd)) {
-                    console.log('Winner');
+                    //console.log('Winner');
                     if (level < 10) {
                         nextLevel();
                     } else {
@@ -178,7 +179,7 @@
                     }
 
                 } else {
-                    console.log('lose');
+                    //console.log('lose');
                     restartLevel();
                 }
             }
@@ -191,6 +192,7 @@
   </head>
   <body>
     <div>
+        <button onclick="javascript: youAreWinner()">Click</button>
         <h1>Tap when the shapes meet</h1>
         <canvas id="game" width="320" height="320"></canvas>
         <h1>Score 10 to complete your purchase</h1>
