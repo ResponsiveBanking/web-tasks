@@ -22,20 +22,50 @@
         .card  {
             background-repeat: no-repeat;
             background: -webkit-linear-gradient(290deg, #3023AE, #C96DD8); /* For Safari 5.1 to 6.0 */
+            border-radius: 0;
         }
 
         p {
             color: white;
+            font-size: 13px;
         }
 
         .header {
             text-align: center;
             color: white;
+            font-size: 28px;
+        }
+
+        .line {
+            color: #979797;
+        }
+
+        .main {
+            padding: 15px;
         }
 
         .btn-primary {
-
+            color: #003366;
+            background-color: white;
+            border-color: white
         }
+
+        .btn-secondary {
+            color: white;
+            background-color: rgba(1,1,1,0);
+            border-color: white
+        }
+
+        .link {
+            color: white;
+            text-decoration: underline;
+            font-weight: bold;
+        }
+
+        .lowerP {
+            padding-top: 15px;
+        }
+
     </style>
     <title>Card</title>
     <script>
@@ -65,16 +95,22 @@
     <div class="card">
         <div class="card-block">
             <div class="card-text">
-                <h1 class="header">You've overspent</h1>
+                <h1 class="header">Your spending has increased</h1>
             </div>
             <div id="container" style="min-width: 270px; height: 200px; margin: 0 auto"></div>
-            <p>Lorem ipsum dolor sit ame. Excepteur sint occaecat cupidatat non proident, sunt in anim id est laborum.</p>
-            <div class="row">
-                <div class="col">
-                    <button onClick="javascipt: helpMe()" class="btn btn-primary btn-block">HELP ME</button>
-                    <p>I am text describing the above button</p>
-                    <button onClick="javascipt: dontHelpMe()"class="btn btn-secondary btn-block">DON'T HELP ME</button>
-                    <p>I am text describing the above button</p>
+                <div class="main">
+                    <p>Today you've spent over double what you normally do. This could have have a big impact on the amount you pay each month.</p>
+                    <button onClick="javascipt: helpMe()" class="btn btn-primary btn-block">Pause my spending</button>
+                    <p class="lowerP">Pausing your spending means we will ask for your confirmation before letting anymore transactions through.</p>
+                    <hr />
+                   <p>Have you thought about <a class="link" href>alternative activities</a>?</p>
+                   <hr />
+                   <p>Have you thought about <a class="link" href>returning items</a> you don't want anymore?</p>
+                   <hr />
+                <div class="row">
+                    <div class="col">
+                        <button onClick="javascipt: dontHelpMe()"class="btn btn-secondary btn-block">Not right now</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -96,7 +132,7 @@
       ],
       labels: {
           style: {
-              color: 'red'
+              color: 'white'
           }
       },
   },
@@ -129,12 +165,12 @@
   series: [{
       data: [{
             y:50,
-          color: '#FF0000 ',
-          borderColor: '#FF0000'
+          color: 'rgba(167, 167, 167, 0.8)',
+          borderColor: 'rgba(167, 167, 167, 0.8)'
          }, {
              y:150,
-          color: 'blue',
-          borderColor: 'blue'
+          color: 'rgba(245, 81, 95, 1)',
+          borderColor: 'rgba(245, 81, 95, 1)'
       }],
       dataLabels: {
           enabled: true,

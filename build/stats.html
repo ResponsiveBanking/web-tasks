@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+
+
+    <style>
+        .card  {
+            background-repeat: no-repeat;
+            background: -webkit-linear-gradient(290deg, #3023AE, #C96DD8); /* For Safari 5.1 to 6.0 */
+        }
+
+        p {
+            color: white;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+        }
+
+        .btn-primary {
+            color: #003366;
+            background-color: white;
+            border-color: white
+        }
+    </style>
+    <title>Card</title>
+    <script>
+        function done() {
+            console.log("Hand back to android - done");
+            if (typeof Android !== 'undefined') {
+                console.log('done is: ' + typeof Android.done);
+                Android.done();
+            } else {
+                console.log("Android is null");
+            }
+        }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <div class="card" style="min-height: 700px;">
+        <div class="card-block">
+            <div class="card-text">
+                <h1 class="header">Achievements</h1>
+                <p>
+                    You've saved £234.18 by not spending this week.
+                </p>
+                <p>
+                    Your miniumum montly payment this month is £18.12 rather than £36.19.
+                </p>
+                <p>
+                    You spend most at 10pm and 2pm.
+                </p>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <button onClick="javascipt: done()" class="btn btn-primary btn-block">Done</button>
+                </div>
+            </div>
+        </div>
+    </div>
+  </body>
+</html>
